@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<widget id="com.mendix.widget.custom.Gantt.Gantt" needsEntityContext="false" offlineCapable="true" supportedPlatform="Web"
+<widget id="com.mendix.widget.custom.Gantt.Gantt" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web"
     xmlns="http://www.mendix.com/widget/1.0/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
     <name>Gantt</name>
@@ -7,10 +7,54 @@
     <icon></icon>
     <properties>
         <propertyGroup caption="通用">
-            <property key="myString" type="string" required="false" multiline="false">
-                <caption>String</caption>
-                <description></description>
-            </property>
+            <propertyGroup caption="数据源">
+                <property key="entityTask" type="entity" required="true" pathType="referenceSet" isPath="yes" allowNonPersistableEntities="true">
+                    <caption>任务</caption>
+                    <description></description>
+                </property>
+                <property key="attStart" type="attribute" entityProperty="entityTask" required="true" isPath="no">
+                    <caption>开始时间</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="DateTime" />
+                    </attributeTypes>
+                </property>
+                <property key="attEnd" type="attribute" entityProperty="entityTask" required="true" isPath="no">
+                    <caption>结束时间</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="DateTime" />
+                    </attributeTypes>
+                </property>
+                <property key="attName" type="attribute" entityProperty="entityTask" required="true" isPath="no">
+                    <caption>名称</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
+                <property key="attTimeScale" type="attribute" entityProperty="entityTask" required="true" isPath="no">
+                    <caption>时间粒度</caption>
+                    <description>一列所代表的时间跨度；Hour, Quarter Day, Half Day, Day, Week(ISO-8601, 1st day is Monday), Month </description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
+                <property key="attProgress" type="attribute" entityProperty="entityTask" required="true" isPath="no">
+                    <caption>进度</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="Decimal" />
+                    </attributeTypes>
+                </property>
+                <property key="attIsDisabled" type="attribute" entityProperty="entityTask" required="true" isPath="no">
+                    <caption>禁用</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="Boolean" />
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
         </propertyGroup>
     </properties>
 </widget>
