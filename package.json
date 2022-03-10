@@ -1,6 +1,6 @@
 {
-  "name": "cascader",
-  "widgetName": "Cascader",
+  "name": "Gantt",
+  "widgetName": "Gantt",
   "version": "1.0.0",
   "description": "Template repo for legacy custome wiget",
   "copyright": "2021 Mendix",
@@ -32,7 +32,7 @@
     "generateTypings": "gulp generateTypings --gulpfile script/gulp.js",
     "openTestProject": "start tests/testProject/testProject.mpr",
     "backupTestProject": "cmd /c (if not exist dummy\\deployment\\data\\database\\hsqldb\\default (mkdir dummy\\deployment\\data\\database\\hsqldb\\default) else (echo skip 1)) && (if not exist dummy\\widgets (mkdir dummy\\widgets) else (echo skip 2)) && copy tests\\testProject\\testProject.mpr dummy\\ /Y && copy tests\\testProject\\deployment\\data\\database\\hsqldb\\default\\default.script dummy\\deployment\\data\\database\\hsqldb\\default\\",
-    "postbackupTestProject": "cmd /c copy tests\\testProject\\widgets\\com.mendix.widget.custom.Cascader.mpk dummy\\widgets\\",
+    "postbackupTestProject": "cmd /c copy tests\\testProject\\widgets\\com.mendix.widget.custom.Gantt.mpk dummy\\widgets\\",
     "restoreTestProject": "cmd /c xcopy dummy tests\\testProject /E /Y"
   },
   "license": "Apache-2.0",

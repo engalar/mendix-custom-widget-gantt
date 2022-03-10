@@ -1,12 +1,12 @@
 import { createElement, useEffect, useMemo } from "react";
 
-import { CascaderContainerProps } from "../typings/CascaderProps";
+import { GanttContainerProps } from "../typings/GanttProps";
 
 import "./ui/index.scss";
 
 import { Observer } from "mobx-react";
 import { Store } from "./store";
-import { CascaderComponent } from "./components/CascaderComponent";
+import { GanttComponent } from "./components/GanttComponent";
 import { useUnmount } from "ahooks";
 
 const parseStyle = (style = ""): { [key: string]: string } => {
@@ -24,7 +24,7 @@ const parseStyle = (style = ""): { [key: string]: string } => {
     }
 };
 
-export default function Cascader(props: CascaderContainerProps) {
+export default function Gantt(props: GanttContainerProps) {
     const store = useMemo(() => new Store(props), []);
 
     useEffect(() => {
@@ -39,6 +39,6 @@ export default function Cascader(props: CascaderContainerProps) {
 
     return <Observer>{() =>
         <div className={props.class} style={parseStyle(props.style)}>
-            <CascaderComponent store={store} />
+            <GanttComponent store={store} />
         </div>}</Observer>;
 }

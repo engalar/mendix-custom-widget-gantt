@@ -1,6 +1,6 @@
 import { CascaderOptionType } from "antd/lib/cascader";
 import { configure, flow, makeObservable, observable, when } from "mobx";
-import { CascaderContainerProps } from "../../typings/CascaderProps";
+import { GanttContainerProps } from "../../typings/GanttProps";
 
 configure({ enforceActions: "observed", isolateGlobalState: true, useProxies: "never" });
 
@@ -11,7 +11,7 @@ export class Store {
      */
     public dispose() {}
 
-    constructor(public mxOption: CascaderContainerProps) {
+    constructor(public mxOption: GanttContainerProps) {
         makeObservable(this, { options: observable, load: flow.bound });
 
         when(
