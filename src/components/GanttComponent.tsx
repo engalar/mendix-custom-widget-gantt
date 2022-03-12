@@ -32,7 +32,6 @@ function initTasks() {
             progress: 25,
             type: "project",
             hideChildren: false,
-            displayOrder: 1,
         },
         {
             start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 2),
@@ -49,7 +48,6 @@ function initTasks() {
             type: "project",
             project: "ProjectSample",
             hideChildren: false,
-            displayOrder: 2,
             dependencies: ["ProjectSample"],
         },
         {
@@ -67,7 +65,6 @@ function initTasks() {
             dependencies: ["sub Task 1"],
             type: "task",
             project: "sb",
-            displayOrder: 4,
         },
         {
             start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 4),
@@ -83,7 +80,6 @@ function initTasks() {
             progress: 45,
             type: "task",
             project: "sb",
-            displayOrder: 3,
         },
         {
             start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 2),
@@ -94,7 +90,6 @@ function initTasks() {
             dependencies: ["Task 0"],
             type: "task",
             project: "ProjectSample",
-            displayOrder: 5,
         },
         {
             start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 4),
@@ -105,7 +100,6 @@ function initTasks() {
             dependencies: ["Task 1"],
             type: "task",
             project: "ProjectSample",
-            displayOrder: 6,
         },
         {
             start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 8),
@@ -116,7 +110,6 @@ function initTasks() {
             dependencies: ["Task 2"],
             type: "task",
             project: "ProjectSample",
-            displayOrder: 7,
         },
         {
             start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 8),
@@ -127,7 +120,6 @@ function initTasks() {
             progress: 70,
             dependencies: ["Task 2"],
             project: "ProjectSample",
-            displayOrder: 8,
         },
         {
             start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 15),
@@ -138,7 +130,6 @@ function initTasks() {
             type: "milestone",
             dependencies: ["Task 4"],
             project: "ProjectSample",
-            displayOrder: 6,
         },
         {
             start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 18),
