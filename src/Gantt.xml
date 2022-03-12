@@ -33,11 +33,11 @@
                         <attributeType name="String" />
                     </attributeTypes>
                 </property>
-                <property key="attTimeScale" type="attribute" entityProperty="entityTask" required="true" isPath="no">
-                    <caption>时间粒度</caption>
-                    <description>一列所代表的时间跨度；Hour, Quarter Day, Half Day, Day, Week(ISO-8601, 1st day is Monday), Month </description>
+                <property key="attIsProject" type="attribute" entityProperty="entityTask" required="true" isPath="no">
+                    <caption>任务类型</caption>
+                    <description>True 表示项目，False表示任务</description>
                     <attributeTypes>
-                        <attributeType name="String" />
+                        <attributeType name="Boolean" />
                     </attributeTypes>
                 </property>
                 <property key="attProgress" type="attribute" entityProperty="entityTask" required="true" isPath="no">
@@ -52,6 +52,15 @@
                     <description></description>
                     <attributeTypes>
                         <attributeType name="Boolean" />
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="配置">
+                <property key="attTimeScale" type="attribute" required="true" isPath="no">
+                    <caption>时间粒度</caption>
+                    <description>一列所代表的时间跨度；Hour, Quarter Day, Half Day, Day, Week(ISO-8601, 1st day is Monday), Month </description>
+                    <attributeTypes>
+                        <attributeType name="String" />
                     </attributeTypes>
                 </property>
             </propertyGroup>

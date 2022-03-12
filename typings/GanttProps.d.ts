@@ -27,6 +27,7 @@ interface _W {
     attTimeScale: string;
     attProgress: string;
     attIsDisabled: string;
+    attIsProject: string;
 }
 
 export interface GanttContainerProps extends CommonProps, _W {}
