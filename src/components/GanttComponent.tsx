@@ -35,20 +35,55 @@ function initTasks() {
             displayOrder: 1,
         },
         {
-            start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 1),
+            start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 2),
             end: new Date(
                 currentDate.getFullYear(),
                 currentDate.getMonth(),
-                2,
+                6,
                 12,
                 28
             ),
-            name: "Idea",
-            id: "Task 0",
+            name: "Sub project",
+            id: "sb",
+            progress: 45,
+            type: "project",
+            project: "ProjectSample",
+            hideChildren: false,
+            displayOrder: 2,
+            dependencies: ["ProjectSample"],
+        },
+        {
+            start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 2),
+            end: new Date(
+                currentDate.getFullYear(),
+                currentDate.getMonth(),
+                3,
+                12,
+                28
+            ),
+            name: "Task 0 in Sub project",
+            id: "sub Task 0",
+            progress: 45,
+            dependencies: ["sub Task 1"],
+            type: "task",
+            project: "sb",
+            displayOrder: 4,
+        },
+        {
+            start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 4),
+            end: new Date(
+                currentDate.getFullYear(),
+                currentDate.getMonth(),
+                6,
+                12,
+                28
+            ),
+            name: "Task 1 in Sub project",
+            id: "sub Task 1",
             progress: 45,
             type: "task",
-            project: "ProjectSample",
-            displayOrder: 2,
+            project: "sb",
+            displayOrder: 3,
         },
         {
             start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 2),
@@ -59,7 +94,7 @@ function initTasks() {
             dependencies: ["Task 0"],
             type: "task",
             project: "ProjectSample",
-            displayOrder: 3,
+            displayOrder: 5,
         },
         {
             start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 4),
@@ -70,7 +105,7 @@ function initTasks() {
             dependencies: ["Task 1"],
             type: "task",
             project: "ProjectSample",
-            displayOrder: 4,
+            displayOrder: 6,
         },
         {
             start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 8),
@@ -81,7 +116,7 @@ function initTasks() {
             dependencies: ["Task 2"],
             type: "task",
             project: "ProjectSample",
-            displayOrder: 5,
+            displayOrder: 7,
         },
         {
             start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 8),
@@ -92,7 +127,7 @@ function initTasks() {
             progress: 70,
             dependencies: ["Task 2"],
             project: "ProjectSample",
-            displayOrder: 6,
+            displayOrder: 8,
         },
         {
             start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 15),
@@ -103,7 +138,7 @@ function initTasks() {
             type: "milestone",
             dependencies: ["Task 4"],
             project: "ProjectSample",
-            displayOrder: 7,
+            displayOrder: 6,
         },
         {
             start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 18),
@@ -127,9 +162,32 @@ export function GanttComponent(props: GanttComponentProps) {
     console.log(props);
     const [tasks, setTasks] = useState<Task[]>(initTasks());
 
-    const handleExpanderClick = (task: Task) => {
-        setTasks(tasks.map(t => (t.id === task.id ? task : t)));
-        console.log("On expander click Id:" + task.id);
+
+    const handleTaskChange = (task: Task) => {
+        console.log("On date change Id:" + task.id);
+        let newTasks = tasks.map(t => (t.id === task.id ? task : t));
+        if (task.project) {
+            const [start, end] = getStartEndDateForProject(newTasks, task.project);
+            const project = newTasks[newTasks.findIndex(t => t.id === task.project)];
+            if (
+                project.start.getTime() !== start.getTime() ||
+                project.end.getTime() !== end.getTime()
+            ) {
+                const changedProject = { ...project, start, end };
+                newTasks = newTasks.map(t =>
+                    t.id === task.project ? changedProject : t
+                );
+            }
+        }
+        setTasks(newTasks);
+    };
+
+    const handleTaskDelete = (task: Task) => {
+        const conf = window.confirm("Are you sure about " + task.name + " ?");
+        if (conf) {
+            setTasks(tasks.filter(t => t.id !== task.id));
+        }
+        return conf;
     };
 
     const handleProgressChange = async (task: Task) => {
@@ -137,10 +195,27 @@ export function GanttComponent(props: GanttComponentProps) {
         console.log("On progress change Id:" + task.id);
     };
 
+    const handleDblClick = (task: Task) => {
+        alert("On Double Click event Id:" + task.id);
+    };
+
+    const handleSelect = (task: Task, isSelected: boolean) => {
+        console.log(task.name + " has " + (isSelected ? "selected" : "unselected"));
+    };
+
+    const handleExpanderClick = (task: Task) => {
+        setTasks(tasks.map(t => (t.id === task.id ? task : t)));
+        console.log("On expander click Id:" + task.id);
+    };
+
     return (
         <Gantt
-            onExpanderClick={handleExpanderClick}
+            onDateChange={handleTaskChange}
+            onDelete={handleTaskDelete}
             onProgressChange={handleProgressChange}
+            onDoubleClick={handleDblClick}
+            onSelect={handleSelect}
+            onExpanderClick={handleExpanderClick}
             tasks={tasks}
         />
     );
