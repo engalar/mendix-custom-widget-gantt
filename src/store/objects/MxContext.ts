@@ -19,7 +19,11 @@ export class MxContext extends BaseMxObject {
     }
     constructor(guid: string, public option: _W) {
         super(guid);
-        makeObservable(this, { projectMap: observable, taskMap: observable, data: computed });
+        makeObservable(this, {
+            projectMap: observable,
+            taskMap: observable,
+            data: computed
+        });
         const projectGuids = this.mxObject!.getReferences(getReferencePart(option.entityProject, "referenceAttr"));
         projectGuids.forEach(d => {
             this.projectMap.set(d, new MxProject(d, option));

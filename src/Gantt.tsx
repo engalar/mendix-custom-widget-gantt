@@ -28,10 +28,12 @@ export default function Gantt(props: GanttContainerProps) {
     const store = useMemo(() => new Store(props), []);
 
     useEffect(() => {
-        store.$mxOption = props;
+        if (props.mxObject && store.$context?.guid != props.mxObject.getGuid()) {
+            store.$option = props;
+        }
         return () => {
         }
-    }, [store, props]);
+    }, [store, props.mxObject]);
 
     useUnmount(() => {
         store.dispose();

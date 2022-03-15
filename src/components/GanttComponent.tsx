@@ -3,7 +3,8 @@ import { createElement, useEffect, useState } from "react";
 import { Gantt, Task } from 'gantt-task-react';
 
 import { Store } from "../store";
-import { autorun } from "mobx";
+import { reaction } from "mobx";
+import { debounce } from "lodash-es";
 
 export function getStartEndDateForProject(tasks: Task[], projectId: string) {
     const projectTasks = tasks.filter(t => t.project === projectId);
@@ -151,7 +152,6 @@ export interface GanttComponentProps {
 
 
 export function GanttComponent(props: GanttComponentProps) {
-    console.log(props);
     const [tasks, setTasks] = useState<Task[]>(initTasks());
 
 
@@ -201,10 +201,14 @@ export function GanttComponent(props: GanttComponentProps) {
     };
 
     useEffect(() => {
-        autorun(() => {
-            console.log('autorun', props.store.$context?.data);
-        })
-    });
+        const dis = reaction(() => props.store.$context?.data, debounce(value => {
+            console.log('autorun', value);
+        }, 500
+        ));
+        () => {
+            dis();
+        }
+    }, []);
 
     return (
         <Gantt
