@@ -1,8 +1,9 @@
-import { createElement, useState } from "react";
+import { createElement, useEffect, useState } from "react";
 
 import { Gantt, Task } from 'gantt-task-react';
 
 import { Store } from "../store";
+import { autorun } from "mobx";
 
 export function getStartEndDateForProject(tasks: Task[], projectId: string) {
     const projectTasks = tasks.filter(t => t.project === projectId);
@@ -198,6 +199,12 @@ export function GanttComponent(props: GanttComponentProps) {
         setTasks(tasks.map(t => (t.id === task.id ? task : t)));
         console.log("On expander click Id:" + task.id);
     };
+
+    useEffect(() => {
+        autorun(() => {
+            console.log('autorun', props.store.$context?.data);
+        })
+    });
 
     return (
         <Gantt

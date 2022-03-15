@@ -20,14 +20,21 @@ interface CommonProps {
 }
 
 interface _W {
-    entityTask: any;
-    attStart: string;
-    attEnd: string;
-    attName: string;
-    attTimeScale: string;
-    attProgress: string;
-    attIsDisabled: string;
-    attIsProject: string;
+    attProjectEnd: "string";
+    attProjectIsDisabled: "string";
+    attProjectName: "string";
+    attProjectProgress: "string";
+    attProjectStart: "string";
+    attTaskEnd: "string";
+    attTaskIsDisabled: "string";
+    attTaskName: "string";
+    attTaskProgress: "string";
+    attTaskStart: "string";
+    attTimeScale: "string";
+    entityProject: "string";
+    entityProjectFromTask: "string";
+    entityTask: "string";
+    entityTaskFromTask: "string";
 }
 
 export interface GanttContainerProps extends CommonProps, _W {}

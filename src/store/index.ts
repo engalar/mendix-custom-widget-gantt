@@ -1,49 +1,29 @@
-import { configure, makeObservable, when } from "mobx";
+import { autorun, configure, makeObservable, observable } from "mobx";
 import { GanttContainerProps } from "../../typings/GanttProps";
+import { MxContext } from "./objects/MxContext";
 
 configure({ enforceActions: "observed", isolateGlobalState: true, useProxies: "never" });
 
 export class Store {
-    sub?: mx.Subscription;
-    /**
-     * dispose
-     */
-    public dispose() {}
+    $context?: MxContext;
+    
+    public dispose() {
+        if (this.$context) {
+            this.$context.dispose();
+        }
+    }
 
-    constructor(public mxOption: GanttContainerProps) {
-        makeObservable(this, { });
+    constructor(public $mxOption: GanttContainerProps) {
+        makeObservable(this, { $mxOption: observable, $context: observable });
 
-        when(
-            () => !!this.mxOption.mxObject,
-            () => {
-                this.update();
-
-                this.sub = mx.data.subscribe(
-                    {
-                        guid: this.mxOption.mxObject!.getGuid(),
-                        callback: () => {
-                            this.update();
-                            //等待视图刷新
-                            setTimeout(() => {
-                                this.drawSelection();
-                            }, 1);
-                        }
-                    },
-                    //@ts-ignore
-                    this.mxOption.mxform
-                );
-            },
-            {
-                onError(e) {
-                    console.error(e);
+        autorun(() => {
+            console.log(this.$mxOption.mxObject);
+            if (this.$mxOption.mxObject) {
+                if (this.$context) {
+                    this.$context.dispose();
                 }
+                this.$context = new MxContext(this.$mxOption.mxObject.getGuid(), this.$mxOption);
             }
-        );
-    }
-    update() {
-        throw new Error("Method not implemented.");
-    }
-    drawSelection() {
-        throw new Error("Method not implemented.");
+        });
     }
 }

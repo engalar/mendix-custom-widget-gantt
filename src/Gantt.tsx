@@ -28,7 +28,7 @@ export default function Gantt(props: GanttContainerProps) {
     const store = useMemo(() => new Store(props), []);
 
     useEffect(() => {
-        store.mxOption = props;
+        store.$mxOption = props;
         return () => {
         }
     }, [store, props]);

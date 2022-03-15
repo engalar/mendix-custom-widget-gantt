@@ -3,12 +3,12 @@
   "compilerOptions": {
     "module": "es6",
     "types": [
-      "mendix-client",
-      "jest"
+      "mendix-client"
     ],
     "typeRoots": [
       "./typings",
-      "./node_modules/@engalar"
+      "./node_modules/@types",
+      "./node_modules/@engalar",
     ],
     "resolveJsonModule": true,
     "useDefineForClassFields": true

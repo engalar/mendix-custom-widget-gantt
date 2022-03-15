@@ -1,13 +1,13 @@
 import { makeObservable } from "mobx";
 import { BaseMxObject } from "./BaseMxObject";
 
-export class OptionItem extends BaseMxObject {
+export class MxTask extends BaseMxObject {
     /**
      *
      * @param guid mxobj guid
      * @param idx option index
      */
-    constructor(guid: string, public idx: number) {
+    constructor(guid: string) {
         super(guid);
         makeObservable(this, {});
         this.update();

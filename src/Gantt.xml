@@ -7,47 +7,40 @@
     <icon></icon>
     <properties>
         <propertyGroup caption="通用">
-            <propertyGroup caption="数据源">
-                <property key="entityTask" type="entity" required="true" pathType="referenceSet" isPath="yes" allowNonPersistableEntities="true">
-                    <caption>任务</caption>
+            <propertyGroup caption="项目">
+                <property key="entityProject" type="entity" required="true" pathType="referenceSet" isPath="yes" allowNonPersistableEntities="true">
+                    <caption>项目实体</caption>
                     <description></description>
                 </property>
-                <property key="attStart" type="attribute" entityProperty="entityTask" required="true" isPath="no">
+                <property key="attProjectStart" type="attribute" entityProperty="entityProject" required="true" isPath="no">
                     <caption>开始时间</caption>
                     <description></description>
                     <attributeTypes>
                         <attributeType name="DateTime" />
                     </attributeTypes>
                 </property>
-                <property key="attEnd" type="attribute" entityProperty="entityTask" required="true" isPath="no">
+                <property key="attProjectEnd" type="attribute" entityProperty="entityProject" required="true" isPath="no">
                     <caption>结束时间</caption>
                     <description></description>
                     <attributeTypes>
                         <attributeType name="DateTime" />
                     </attributeTypes>
                 </property>
-                <property key="attName" type="attribute" entityProperty="entityTask" required="true" isPath="no">
+                <property key="attProjectName" type="attribute" entityProperty="entityProject" required="true" isPath="no">
                     <caption>名称</caption>
                     <description></description>
                     <attributeTypes>
                         <attributeType name="String" />
                     </attributeTypes>
                 </property>
-                <property key="attIsProject" type="attribute" entityProperty="entityTask" required="true" isPath="no">
-                    <caption>任务类型</caption>
-                    <description>True 表示项目，False表示任务</description>
-                    <attributeTypes>
-                        <attributeType name="Boolean" />
-                    </attributeTypes>
-                </property>
-                <property key="attProgress" type="attribute" entityProperty="entityTask" required="true" isPath="no">
+                <property key="attProjectProgress" type="attribute" entityProperty="entityProject" required="true" isPath="no">
                     <caption>进度</caption>
                     <description></description>
                     <attributeTypes>
                         <attributeType name="Decimal" />
                     </attributeTypes>
                 </property>
-                <property key="attIsDisabled" type="attribute" entityProperty="entityTask" required="true" isPath="no">
+                <property key="attProjectIsDisabled" type="attribute" entityProperty="entityProject" required="true" isPath="no">
                     <caption>禁用</caption>
                     <description></description>
                     <attributeTypes>
@@ -55,10 +48,61 @@
                     </attributeTypes>
                 </property>
             </propertyGroup>
+            <propertyGroup caption="任务">
+                <property key="entityTask" type="entity" required="true" pathType="referenceSet" isPath="yes" allowNonPersistableEntities="true">
+                    <caption>任务实体</caption>
+                    <description></description>
+                </property>
+                <property key="attTaskStart" type="attribute" entityProperty="entityTask" required="true" isPath="no">
+                    <caption>开始时间</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="DateTime" />
+                    </attributeTypes>
+                </property>
+                <property key="attTaskEnd" type="attribute" entityProperty="entityTask" required="true" isPath="no">
+                    <caption>结束时间</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="DateTime" />
+                    </attributeTypes>
+                </property>
+                <property key="attTaskName" type="attribute" entityProperty="entityTask" required="true" isPath="no">
+                    <caption>名称</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
+                <property key="attTaskProgress" type="attribute" entityProperty="entityTask" required="true" isPath="no">
+                    <caption>进度</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="Decimal" />
+                    </attributeTypes>
+                </property>
+                <property key="attTaskIsDisabled" type="attribute" entityProperty="entityTask" required="true" isPath="no">
+                    <caption>禁用</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="Boolean" />
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="关联">
+                <property key="entityProjectFromTask" type="entity" required="true" isPath="yes" pathType="reference" allowNonPersistableEntities="true" entityProperty="entityTask">
+                    <caption>所属项目</caption>
+                    <description>任务的所属项目</description>
+                </property>
+                <property key="entityTaskFromTask" type="entity" required="true" isPath="yes" pathType="reference" allowNonPersistableEntities="true" entityProperty="entityTask">
+                    <caption>依赖任务</caption>
+                    <description></description>
+                </property>
+            </propertyGroup>
             <propertyGroup caption="配置">
                 <property key="attTimeScale" type="attribute" required="true" isPath="no">
                     <caption>时间粒度</caption>
-                    <description>一列所代表的时间跨度；Hour, Quarter Day, Half Day, Day, Week(ISO-8601, 1st day is Monday), Month </description>
+                    <description>一列所代表的时间跨度；Hour, QuarterDay, HalfDay, Day, Week(ISO-8601, 1st day is Monday), Month </description>
                     <attributeTypes>
                         <attributeType name="String" />
                     </attributeTypes>
