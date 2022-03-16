@@ -1,7 +1,12 @@
 {
   "extends": "./node_modules/@mendix/pluggable-widgets-tools/configs/tsconfig.base.json",
   "compilerOptions": {
-    "module": "es6",
+    "module": "esnext",
+    "target": "es6",
+    "lib": [
+      "esnext",
+      "dom"
+    ],
     "types": [
       "mendix-client"
     ],
