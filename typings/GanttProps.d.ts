@@ -32,8 +32,14 @@ interface _W {
     attTaskStart: "string";
     attTimeScale: "string";
     entityProject: "string";
+    /**
+     * 所属项目
+     */
     entityProjectFromTask: "string";
     entityTask: "string";
+    /**
+     * 依赖任务
+     */
     entityTaskFromTask: "string";
 }
 

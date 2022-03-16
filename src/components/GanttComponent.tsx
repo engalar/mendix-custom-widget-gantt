@@ -203,6 +203,9 @@ export function GanttComponent(props: GanttComponentProps) {
     useEffect(() => {
         const dis = reaction(() => props.store.$context?.data, debounce(value => {
             console.log('autorun', value);
+            if (value.length > 0) {
+                setTasks(value);
+            }
         }, 500
         ));
         () => {

@@ -15,7 +15,12 @@ export class MxContext extends BaseMxObject {
     get data(): Task[] {
         return Array.from(this.projectMap.values())
             .filter(d => d.data)
-            .map(d => d.data!);
+            .map(d => d.data!)
+            .concat(
+                Array.from(this.taskMap.values())
+                    .filter(d => d.data)
+                    .map(d => d.data!)
+            );
     }
     constructor(guid: string, public option: _W) {
         super(guid);
@@ -24,6 +29,12 @@ export class MxContext extends BaseMxObject {
             taskMap: observable,
             data: computed
         });
+
+        const taskGuids = this.mxObject!.getReferences(getReferencePart(option.entityTask, "referenceAttr"));
+        taskGuids.forEach(d => {
+            this.taskMap.set(d, new MxTask(d, option));
+        });
+
         const projectGuids = this.mxObject!.getReferences(getReferencePart(option.entityProject, "referenceAttr"));
         projectGuids.forEach(d => {
             this.projectMap.set(d, new MxProject(d, option));

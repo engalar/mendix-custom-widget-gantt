@@ -6,9 +6,7 @@ import { _W } from "../../../typings/GanttProps";
 import { BaseMxObject } from "./BaseMxObject";
 
 export class MxProject extends BaseMxObject {
-    name: string = "";
     data?: Task;
-
     /**
      *
      * @param guid mxobj guid
@@ -16,7 +14,7 @@ export class MxProject extends BaseMxObject {
      */
     constructor(guid: string, public option: _W) {
         super(guid);
-        makeObservable(this, { name: observable, data: observable });
+        makeObservable(this, { data: observable });
         this.update();
         this.onChange = () => {
             this.update();
