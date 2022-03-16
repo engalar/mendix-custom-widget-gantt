@@ -1,9 +1,9 @@
 import { createElement, useEffect, useState } from "react";
 
-import { Gantt, Task } from 'gantt-task-react';
+import { Gantt, Task, ViewMode } from 'gantt-task-react';
 
 import { Store } from "../store";
-import { reaction } from "mobx";
+import { autorun, reaction } from "mobx";
 import { debounce } from "lodash-es";
 
 export function getStartEndDateForProject(tasks: Task[], projectId: string) {
@@ -153,8 +153,9 @@ export interface GanttComponentProps {
 
 export function GanttComponent(props: GanttComponentProps) {
     const [tasks, setTasks] = useState<Task[]>(initTasks());
+    const [viewMode, setViewMode] = useState<ViewMode>(ViewMode.Day);
 
-
+    //#region 
     const handleTaskChange = (task: Task) => {
         console.log("On date change Id:" + task.id);
         let newTasks = tasks.map(t => (t.id === task.id ? task : t));
@@ -199,6 +200,7 @@ export function GanttComponent(props: GanttComponentProps) {
         setTasks(tasks.map(t => (t.id === task.id ? task : t)));
         console.log("On expander click Id:" + task.id);
     };
+    //#endregion
 
     useEffect(() => {
         const dis = reaction(() => props.store.$context?.data, debounce(value => {
@@ -208,13 +210,21 @@ export function GanttComponent(props: GanttComponentProps) {
             }
         }, 500
         ));
+
+        const dis2 = autorun(() => {
+            if (props.store.$context?.viewMode) {
+                setViewMode(props.store.$context?.viewMode);
+            }
+        });
         () => {
             dis();
+            dis2();
         }
     }, []);
 
     return (
         <Gantt
+            viewMode={viewMode}
             onDateChange={handleTaskChange}
             onDelete={handleTaskDelete}
             onProgressChange={handleProgressChange}
