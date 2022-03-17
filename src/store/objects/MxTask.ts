@@ -7,7 +7,7 @@ import { BaseMxObject } from "./BaseMxObject";
 
 export class MxTask extends BaseMxObject {
     data?: Task;
-    dependency?: string;
+    // dependency?: string;
     /**
      *
      * @param guid mxobj guid
@@ -15,7 +15,7 @@ export class MxTask extends BaseMxObject {
      */
     constructor(guid: string, public option: _W) {
         super(guid);
-        makeObservable(this, { dependency: observable, data: observable });
+        makeObservable(this, { /* dependency: observable, */ data: observable });
         this.update();
         this.onChange = () => {
             this.update();
@@ -29,14 +29,18 @@ export class MxTask extends BaseMxObject {
                 type: "task",
                 start: new Date(this.mxObject.get(this.option.attTaskStart) as number),
                 end: new Date(this.mxObject.get(this.option.attTaskEnd) as number),
-                progress: (this.mxObject.get(this.option.attTaskProgress) as Big).toNumber(),
+                progress: Math.floor((this.mxObject.get(this.option.attTaskProgress) as Big).toNumber() * 100),
                 isDisabled: this.mxObject.get(this.option.attTaskIsDisabled) as boolean,
-                project: this.mxObject.get(getReferencePart(this.option.entityProjectFromTask, "referenceAttr")) as string,
-                dependencies: []
+                project: this.mxObject.get(
+                    getReferencePart(this.option.entityProjectFromTask, "referenceAttr")
+                ) as string,
+                dependencies: this.mxObject.getReferences(
+                    getReferencePart(this.option.entityTaskFromTask, "referenceAttr")
+                )
             };
-            this.dependency = this.mxObject.get(
+            /* this.dependency = this.mxObject.get(
                 getReferencePart(this.option.entityTaskFromTask, "referenceAttr")
-            ) as string;
+            ) as string; */
         }
     }
 }

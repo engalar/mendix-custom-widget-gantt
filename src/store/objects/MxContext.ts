@@ -1,11 +1,12 @@
 import { getReferencePart } from "@jeltemx/mendix-react-widget-utils";
+import eachDeep from "deepdash/es/eachDeep";
 import { Task, ViewMode } from "gantt-task-react";
 import { computed, makeObservable, observable } from "mobx";
 import { _W } from "../../../typings/GanttProps";
 import { BaseMxObject } from "./BaseMxObject";
 import { MxProject } from "./MxProject";
 import { MxTask } from "./MxTask";
-
+var LTT = require("list-to-tree");
 export class MxContext extends BaseMxObject {
     subViewMode: mx.Subscription;
     viewMode: ViewMode = ViewMode.Day;
@@ -16,14 +17,37 @@ export class MxContext extends BaseMxObject {
     projectMap = new Map<string, MxProject>();
     taskMap = new Map<string, MxTask>();
     get data(): Task[] {
-        return Array.from(this.projectMap.values())
+        let list = Array.from(this.projectMap.values())
+            .concat(Array.from(this.taskMap.values()).filter(d => d.data))
             .filter(d => d.data)
-            .map(d => d.data!)
-            .concat(
-                Array.from(this.taskMap.values())
-                    .filter(d => d.data)
-                    .map(d => d.data!)
-            );
+            .map(d => d.data!);
+
+        const tree = new LTT([{ id: "", project: 0 }, ...list], {
+            key_id: "id",
+            key_parent: "project",
+            empty_children: true
+        });
+        const sortedList: Task[] = [];
+        eachDeep(
+            tree.tree.rootNode.children[0].children,
+            (value, _key, _parent, ctx) => {
+                if (ctx.isCircular) {
+                    console.log("Circular reference to " + ctx.circularParent.path + " skipped at " + ctx.path);
+                    return false; // explicit `false` will skip children of current value
+                }
+                /* console.log(
+                    111,
+                    value.content.name,
+                    key,
+                    Array.isArray(parent) ? parent.map(d => d.content.name) : parent.content.name,
+                    ctx
+                ); */
+                sortedList.push(value.content);
+            },
+            { checkCircular: true, childrenPath: ["children"] }
+        );
+
+        return sortedList;
     }
     constructor(guid: string, public option: _W) {
         super(guid);

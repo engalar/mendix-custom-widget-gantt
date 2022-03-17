@@ -94,7 +94,8 @@
                     <caption>所属项目</caption>
                     <description>任务的所属项目</description>
                 </property>
-                <property key="entityTaskFromTask" type="entity" required="true" isPath="yes" pathType="reference" allowNonPersistableEntities="true" entityProperty="entityTask">
+                <property key="entityTaskFromTask" type="entity" required="true" isPath="yes" pathType="referenceSet" allowNonPersistableEntities="true" entityProperty="entityTask">
+                    
                     <caption>依赖任务</caption>
                     <description></description>
                 </property>
@@ -105,6 +106,7 @@
                     <description>一列所代表的时间跨度；Hour, QuarterDay, HalfDay, Day, Week(ISO-8601, 1st day is Monday), Month </description>
                     <attributeTypes>
                         <attributeType name="String" />
+                        <attributeType name="Enum" />
                     </attributeTypes>
                 </property>
             </propertyGroup>

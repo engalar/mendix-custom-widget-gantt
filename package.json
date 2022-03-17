@@ -69,8 +69,10 @@
     "ahooks": "^2.10.14",
     "classnames": "^2.2.6",
     "gantt-task-react": "^0.3.8",
+    "list-to-tree": "^2.2.4",
+    "deepdash": "^5.3.9",
+    "lodash-es": "^4.17.21",
     "mobx": "^6.3.10",
-    "mobx-react": "^7.2.1",
-    "lodash-es": "^4.17.21"
+    "mobx-react": "^7.2.1"
   }
 }

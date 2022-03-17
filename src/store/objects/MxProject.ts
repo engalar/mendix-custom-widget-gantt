@@ -33,7 +33,8 @@ export class MxProject extends BaseMxObject {
                 project: this.mxObject.get(
                     getReferencePart(this.option.entityProjectFromTask, "referenceAttr")
                 ) as string,
-                dependencies: []
+                dependencies: [],
+                hideChildren: false
             };
         }
     }
