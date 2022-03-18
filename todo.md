@@ -23,6 +23,7 @@
 
 # 临时
 
+-   [x] move sort task by contain into gantt component lib
 -   [x] order
 -   [x] dep task
 -   [x] dep project
