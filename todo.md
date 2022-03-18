@@ -30,4 +30,4 @@
 
 # know issue
 
--   [ ] haf day, QuarterDay 会导致崩溃
+-   [x] haf day, QuarterDay 会导致崩溃

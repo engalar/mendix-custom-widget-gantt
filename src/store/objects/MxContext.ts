@@ -64,7 +64,16 @@ export class MxContext extends BaseMxObject {
             callback: guid => {
                 const enumString = this.mxObject!.get(option.attTimeScale) as string;
                 if (Object.keys(ViewMode).includes(enumString)) {
-                    this.viewMode = enumString as ViewMode;
+                    //@ts-ignore
+                    this.viewMode = {
+                        Hour: "Hour",
+                        QuarterDay: "Quarter Day",
+                        HalfDay: "Half Day",
+                        Day: "Day",
+                        /** ISO-8601 week */
+                        Week: "Week",
+                        Month: "Month"
+                    }[enumString] as ViewMode;
                 } else {
                     console.error(`obj[${guid}] ${enumString} 是一个非法值 不是 ${Object.keys(ViewMode)}`);
                 }
