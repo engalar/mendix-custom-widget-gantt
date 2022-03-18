@@ -1,6 +1,6 @@
 import { getReferencePart } from "@jeltemx/mendix-react-widget-utils";
 import Big from "big.js";
-import { Task } from "gantt-task-react";
+import { Task } from "@engalar/gantt-task-react";
 import { makeObservable, observable } from "mobx";
 import { _W } from "../../../typings/GanttProps";
 import { BaseMxObject } from "./BaseMxObject";

@@ -1,6 +1,6 @@
 import { createElement, useEffect, useState } from "react";
 
-import { Gantt, Task, ViewMode } from 'gantt-task-react';
+import { Gantt, Task, ViewMode } from '@engalar/gantt-task-react';
 
 import { Store } from "../store";
 import { autorun, reaction } from "mobx";

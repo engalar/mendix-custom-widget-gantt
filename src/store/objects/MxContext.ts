@@ -1,6 +1,6 @@
 import { getReferencePart } from "@jeltemx/mendix-react-widget-utils";
 import eachDeep from "deepdash/es/eachDeep";
-import { Task, ViewMode } from "gantt-task-react";
+import { Task, ViewMode } from "@engalar/gantt-task-react";
 import { computed, makeObservable, observable } from "mobx";
 import { _W } from "../../../typings/GanttProps";
 import { BaseMxObject } from "./BaseMxObject";

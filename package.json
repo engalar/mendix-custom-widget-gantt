@@ -1,7 +1,7 @@
 {
   "name": "Gantt",
   "widgetName": "Gantt",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Template repo for legacy custome wiget",
   "copyright": "2021 Mendix",
   "author": "Liu Wengao <wengao.liu@siemens.com>",
@@ -68,7 +68,7 @@
     "@jeltemx/mendix-react-widget-utils": "^0.9.0",
     "ahooks": "^2.10.14",
     "classnames": "^2.2.6",
-    "gantt-task-react": "^0.3.8",
+    "@engalar/gantt-task-react": "^0.3.9",
     "list-to-tree": "^2.2.4",
     "deepdash": "^5.3.9",
     "lodash-es": "^4.17.21",
