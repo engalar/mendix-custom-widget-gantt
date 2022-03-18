@@ -1,7 +1,7 @@
 # 整体
 
 -   general
-    -   [ ] Limited Height
+    -   [x] Limited Height
 -   ds
     -   [x] project
     -   [x] task

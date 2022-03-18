@@ -1,4 +1,4 @@
-import { createElement, useEffect, useState } from "react";
+import { createElement, useEffect, useMemo, useState } from "react";
 
 import { Gantt, Task, ViewMode } from '@engalar/gantt-task-react';
 
@@ -154,6 +154,7 @@ export interface GanttComponentProps {
 export function GanttComponent(props: GanttComponentProps) {
     const [tasks, setTasks] = useState<Task[]>(initTasks());
     const [viewMode, setViewMode] = useState<ViewMode>(ViewMode.Day);
+    const ganttHeight = useMemo<number | undefined>(() => props.store.$option.intGantHeight === 0 ? undefined : props.store.$option.intGantHeight, []);
 
     //#region 
     const handleTaskChange = (task: Task) => {
@@ -231,6 +232,7 @@ export function GanttComponent(props: GanttComponentProps) {
             onSelect={handleSelect}
             onExpanderClick={handleExpanderClick}
             tasks={tasks}
+            ganttHeight={ganttHeight}
         />
     );
 }

@@ -20,27 +20,28 @@ interface CommonProps {
 }
 
 interface _W {
-    attProjectEnd: "string";
-    attProjectIsDisabled: "string";
-    attProjectName: "string";
-    attProjectProgress: "string";
-    attProjectStart: "string";
-    attTaskEnd: "string";
-    attTaskIsDisabled: "string";
-    attTaskName: "string";
-    attTaskProgress: "string";
-    attTaskStart: "string";
-    attTimeScale: "string";
-    entityProject: "string";
+    attProjectEnd: string;
+    attProjectIsDisabled: string;
+    attProjectName: string;
+    attProjectProgress: string;
+    attProjectStart: string;
+    attTaskEnd: string;
+    attTaskIsDisabled: string;
+    attTaskName: string;
+    attTaskProgress: string;
+    attTaskStart: string;
+    attTimeScale: string;
+    entityProject: string;
     /**
      * 所属项目
      */
-    entityProjectFromTask: "string";
-    entityTask: "string";
+    entityProjectFromTask: string;
+    entityTask: string;
     /**
      * 依赖任务
      */
-    entityTaskFromTask: "string";
+    entityTaskFromTask: string;
+    intGantHeight: number;
 }
 
 export interface GanttContainerProps extends CommonProps, _W {}

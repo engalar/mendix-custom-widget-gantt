@@ -95,7 +95,7 @@
                     <description>任务的所属项目</description>
                 </property>
                 <property key="entityTaskFromTask" type="entity" required="true" isPath="yes" pathType="referenceSet" allowNonPersistableEntities="true" entityProperty="entityTask">
-                    
+
                     <caption>依赖任务</caption>
                     <description></description>
                 </property>
@@ -110,6 +110,12 @@
                     </attributeTypes>
                 </property>
             </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="外观">
+            <property key="intGantHeight" type="integer" required="true" defaultValue="0">
+                <caption>图表高度</caption>
+                <description>0表示不限制</description>
+            </property>
         </propertyGroup>
     </properties>
 </widget>
