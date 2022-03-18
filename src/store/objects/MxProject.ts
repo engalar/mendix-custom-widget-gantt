@@ -22,6 +22,9 @@ export class MxProject extends BaseMxObject {
     }
     update() {
         if (this.mxObject) {
+            const project = this.mxObject.get(
+                getReferencePart(this.option.entityProjectFromTask, "referenceAttr")
+            ) as string;
             this.data = {
                 id: this.guid,
                 name: this.mxObject.get(this.option.attProjectName) as string,
@@ -30,9 +33,7 @@ export class MxProject extends BaseMxObject {
                 end: new Date(this.mxObject.get(this.option.attProjectEnd) as number),
                 progress: (this.mxObject.get(this.option.attProjectProgress) as Big).toNumber(),
                 isDisabled: this.mxObject.get(this.option.attProjectIsDisabled) as boolean,
-                project: this.mxObject.get(
-                    getReferencePart(this.option.entityProjectFromTask, "referenceAttr")
-                ) as string,
+                project: project === "" ? undefined : project,
                 dependencies: [],
                 hideChildren: false
             };

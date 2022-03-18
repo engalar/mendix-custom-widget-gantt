@@ -14,7 +14,7 @@
     -   [ ] select
     -   [ ] expander
 -   apperance
-    -   [ ] collapse tab
+    -   [x] collapse tab
     -   [x] chinese
 
 # study
