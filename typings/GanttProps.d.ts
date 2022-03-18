@@ -42,6 +42,9 @@ interface _W {
      */
     entityTaskFromTask: string;
     intGantHeight: number;
+
+    // events
+    nfChangeTask: INanoflow;
 }
 
 export interface GanttContainerProps extends CommonProps, _W {}

@@ -111,6 +111,13 @@
                 </property>
             </propertyGroup>
         </propertyGroup>
+        <propertyGroup caption="事件">
+            <property key="nfChangeTask" type="nanoflow" required="false" entityProperty="entityTask">
+                <caption>任务变化</caption>
+                <description>返回true表示拒绝修改</description>
+                <returnType type="Boolean" />
+            </property>
+        </propertyGroup>
         <propertyGroup caption="外观">
             <property key="intGantHeight" type="integer" required="true" defaultValue="0">
                 <caption>图表高度</caption>

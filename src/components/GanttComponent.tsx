@@ -173,6 +173,7 @@ export function GanttComponent(props: GanttComponentProps) {
                 );
             }
         }
+        props.store.$context?.fireChange(task);
         setTasks(newTasks);
     };
 

@@ -1,7 +1,7 @@
-import { getReferencePart } from "@jeltemx/mendix-react-widget-utils";
+import { executeNanoflow, getObjectContext, getReferencePart } from "@jeltemx/mendix-react-widget-utils";
 import { Task, ViewMode } from "@engalar/gantt-task-react";
 import { computed, makeObservable, observable } from "mobx";
-import { _W } from "../../../typings/GanttProps";
+import { GanttContainerProps, _W } from "../../../typings/GanttProps";
 import { BaseMxObject } from "./BaseMxObject";
 import { MxProject } from "./MxProject";
 import { MxTask } from "./MxTask";
@@ -21,7 +21,7 @@ export class MxContext extends BaseMxObject {
             .filter(d => d.data)
             .map(d => d.data!);
     }
-    constructor(guid: string, public option: _W) {
+    constructor(guid: string, public option: GanttContainerProps) {
         super(guid);
         makeObservable(this, {
             projectMap: observable,
@@ -61,5 +61,24 @@ export class MxContext extends BaseMxObject {
         projectGuids.forEach(d => {
             this.projectMap.set(d, new MxProject(d, option));
         });
+    }
+    fireChange(task: Task) {
+        if (this.option.nfChangeTask && this.mxObject) {
+            switch (task.type) {
+                case "task":
+                    const ctxObj = this.taskMap.get(task.id)?.mxObject;
+                    if (ctxObj) {
+                        ctxObj.set(this.option.attTaskStart, task.start);
+                        executeNanoflow(this.option.nfChangeTask, getObjectContext(ctxObj), this.option.mxform).then(
+                            result => {
+                                console.log(result);
+                            }
+                        );
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
